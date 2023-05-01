@@ -4,7 +4,7 @@
 ///	Details.
 ///
 
-#include<iostream>
+#include <iostream>
 #include "Rectangle.h"
 
 /// @brief default constructor 
@@ -20,7 +20,7 @@ Rectangle::Rectangle()
 /// @brief constructor 
 /// @param w width in pixels
 /// @param h length in pixels
-Rectangle::Rectangle(int w, int l) 
+Rectangle::Rectangle(float w, float l)
 {
 	width = 0;
 	length = 0;
@@ -38,6 +38,16 @@ Rectangle::Rectangle(int w, int l)
 		length = l;
 }
 
+/// @brief copy constructor 
+/// @param reference to the object that should be copied
+Rectangle::Rectangle(const Rectangle& r)
+{
+	cout << "Rectangle - copy constructor" << endl;
+
+	width = r.width;
+	length = r.length;
+}
+
 /// @brief destructor 
 Rectangle::~Rectangle() 
 {
@@ -45,22 +55,35 @@ Rectangle::~Rectangle()
 } 
 
 
-/// @brief set width of the object
-/// @param w width in pixels
-void Rectangle::SetWidth(int w) 
+/// @brief overload of operator = 
+/// @param reference to the object on the right side of the operator 
+/// @return reference to the object on the left side of the operator 
+Rectangle& Rectangle::operator=(const Rectangle& r)
 {
-	if (w < 0) {
-		cout << "WARNING: Rectangle - SetWidth: width should be > 0" << endl;
-		return;
-	}
+	cout << "Rectangle - operator =" << endl;
 
-	width = w;
+	width = r.width;
+	length = r.length;
 
+	return *this;			// return the rectangle
 }
+
+/// @brief overload of operator == 
+/// @param reference to the object on the right side of the operator 
+/// @return true if the two objects have the same width and the same length  
+bool Rectangle::operator==(const Rectangle&r)
+{
+	if (r.width == width && r.length == length)
+		return true;
+
+	return false;
+}
+
+/// functions set
 
 /// @brief set length of the object
 /// @param l length in pixels
-void Rectangle::SetLength(int l)
+void Rectangle::SetLength(float l)
 {
 	if (l < 0) {
 		cout << "WARNING: Rectangle - SetLength: length should be > 0" << endl;
@@ -71,37 +94,66 @@ void Rectangle::SetLength(int l)
 
 }
 
+/// @brief set width of the object
+/// @param w width in pixels
+void Rectangle::SetWidth(float w)
+{
+	if (w < 0) {
+		cout << "WARNING: Rectangle - SetWidth: width should be > 0" << endl;
+		return;
+	}
+
+	width = w;
+}
+
 /// @brief set width and length of the object
 /// @param w width in pixels
 /// @param l length in pixels
-void Rectangle::SetDim(int w, int l) 
+void Rectangle::SetDim(float w, float l)
 {
 	SetWidth(w);
 	SetLength(l);
 }
 
-
-/// @brief return width of the object
-/// @return rectangle width in pixels
-int Rectangle::GetWidth()
-{
-	return width;
-}
+/// functions get
 
 /// @brief get length of the object
 /// @return rectangle length in pixels
-int Rectangle::GetLength() 
+float Rectangle::GetLength()
 {
 	return length;
+}
+
+/// @brief get width of the object
+/// @return rectangle width in pixels
+float Rectangle::GetWidth()
+{
+	return width;
 }
 
 /// @brief get width and length of the object
 /// @param w width in pixels
 /// @param l length in pixels
-void Rectangle::GetDim(int &w, int &l) 
+void Rectangle::GetDim(float&w, float&l)
 {
 	w = width;
 	l = length;
+
+	return;
 }
 
 
+
+/// @brief get area of the object
+/// @return rectangle area in pixels
+float Rectangle::GetArea()
+{
+	return length * width;
+}
+
+/// @brief get perimeter of the object
+/// @return rectangle perimeter in pixels
+float Rectangle::GetPerimeter()
+{
+	return 2 * (length + width);
+}

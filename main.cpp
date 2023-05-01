@@ -4,10 +4,12 @@
 
 int main() 
 {
-	int wa;
-	int la;
-	int wb;
-	int lb;
+	float wa;
+	float la;
+	float wb;
+	float lb;
+	float A;
+	float P;
 	
 	Rectangle objRectA(10,5);
 	Rectangle objRectB;
@@ -19,6 +21,23 @@ int main()
 	la = objRectA.GetLength();
 	wa = objRectA.GetWidth();
 	objRectB.GetDim(wb, lb);
+
+	A = objRectA.GetArea();
+	P = objRectA.GetPerimeter();
+
+	Rectangle objRectC(6, 9);
+	Rectangle objRectD = objRectC;
+
+	if (objRectA == objRectB)
+		cout << "Rectangle A has the same size of Rectangle B" << endl;
+	else
+		cout << "Rectangle A has not the same size of Rectangle B" << endl;
+
+	if (objRectC == objRectD)
+		cout << "Rectangle C has the same size of Rectangle D" << endl;
+	else
+		cout << "Rectangle C has not the same size of Rectangle D" << endl;
+
 
 	return 0;
 }

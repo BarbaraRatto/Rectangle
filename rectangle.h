@@ -15,25 +15,31 @@ using namespace std;
 class Rectangle
 {
 private:
-	int length;
-	int width;
+	float length;
+	float width;
 
 public:
 
-	Rectangle();
-	Rectangle(int w, int l);
-	
-	~Rectangle();
+	Rectangle();									// default constructor
+	Rectangle(float w, float l);					// constructor
+	Rectangle(const Rectangle& r);					// copy constructor	
+
+	~Rectangle();									//destructor
+
+	Rectangle& operator=(const Rectangle& r);		// overload of operator =
+	bool operator==(const Rectangle& r);			// overload of operator == 
 
 	
-	void SetDim(int w, int l);
-	void SetLength(int l);
-	void SetWidth(int w);
+	void SetLength(float l);
+	void SetWidth(float w);
+	void SetDim(float w, float l);
 	
-	void GetDim(int &w, int &l);
-	int GetLength();
-	int GetWidth();
+	float GetLength();
+	float GetWidth();
+	void GetDim(float& w, float& l);
 	
+	float GetArea();
+	float GetPerimeter();
 
 };
 
