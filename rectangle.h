@@ -29,6 +29,9 @@ public:
 	Rectangle& operator=(const Rectangle& r);		// overload of operator =
 	bool operator==(const Rectangle& r);			// overload of operator == 
 
+	void Init();									// function Init
+	void Init(const Rectangle& r);
+	void Reset();									// function Reset
 	
 	void SetLength(float l);
 	void SetWidth(float w);

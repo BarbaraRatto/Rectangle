@@ -12,9 +12,7 @@ Rectangle::Rectangle()
 {
 	cout << "Rectangle - constructor - default" << endl;
 
-	width = 0;
-	length = 0;
-
+	Init();
 }
 
 /// @brief constructor 
@@ -22,17 +20,16 @@ Rectangle::Rectangle()
 /// @param h length in pixels
 Rectangle::Rectangle(float w, float l)
 {
-	width = 0;
-	length = 0;
+	Init();
 
 	cout << "Rectangle - constructor" << endl;
 
-	if (w <= 0) 
+	if (w <= 0.) 
 		cout << "WARNING: Rectangle - constructor: width should be > 0" << endl;
 	else
 		width = w;
 
-	if (l <= 0) 
+	if (l <= 0.) 
 		cout << "WARNING: Rectangle - constructor: length should be > 0" << endl;
 	else
 		length = l;
@@ -44,16 +41,17 @@ Rectangle::Rectangle(const Rectangle& r)
 {
 	cout << "Rectangle - copy constructor" << endl;
 
-	width = r.width;
-	length = r.length;
+	Init(r);											// perchè solo r
 }
 
 /// @brief destructor 
 Rectangle::~Rectangle() 
 {
 	cout << "Rectangle - destructor" << endl;
+	Reset();
 } 
 
+/// Overload of operators
 
 /// @brief overload of operator = 
 /// @param reference to the object on the right side of the operator 
@@ -62,8 +60,7 @@ Rectangle& Rectangle::operator=(const Rectangle& r)
 {
 	cout << "Rectangle - operator =" << endl;
 
-	width = r.width;
-	length = r.length;
+	Init(r);
 
 	return *this;			// return the rectangle
 }
@@ -79,13 +76,40 @@ bool Rectangle::operator==(const Rectangle&r)
 	return false;
 }
 
+/// Init and Reset functions
+
+/// @brief default initialization of the object
+void Rectangle::Init()
+{
+	Reset();						// perchè due volte?
+	width = 0;
+	length = 0;
+}
+
+/// @brief initialization of the object as a copy of another object 
+/// @param r reference to the object that should be copied 
+void Rectangle::Init(const Rectangle& r)
+{
+	Reset();
+	width = r.width;
+	length = r.length;
+}
+
+/// @brief total reset of the object  
+void Rectangle::Reset()
+{
+	width = 0;						
+	length = 0;
+}
+
+
 /// functions set
 
 /// @brief set length of the object
 /// @param l length in pixels
 void Rectangle::SetLength(float l)
 {
-	if (l < 0) {
+	if (l < 0.) {
 		cout << "WARNING: Rectangle - SetLength: length should be > 0" << endl;
 		return;
 	}
@@ -98,7 +122,7 @@ void Rectangle::SetLength(float l)
 /// @param w width in pixels
 void Rectangle::SetWidth(float w)
 {
-	if (w < 0) {
+	if (w < 0.) {
 		cout << "WARNING: Rectangle - SetWidth: width should be > 0" << endl;
 		return;
 	}
@@ -142,7 +166,7 @@ void Rectangle::GetDim(float&w, float&l)
 	return;
 }
 
-
+/// functions Area and Perimeter
 
 /// @brief get area of the object
 /// @return rectangle area in pixels
@@ -157,3 +181,4 @@ float Rectangle::GetPerimeter()
 {
 	return 2 * (length + width);
 }
+
